@@ -132,45 +132,54 @@
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
     
-    // 사진 존재 여부를 빠르게(HEAD 요청) 확인하고 병렬로 렌더링하는 함수
+    // 최대 몇 번까지 사진을 검사할지 설정 (예: 넉넉하게 100장)
+    // 1번부터 100번까지 동시에 "이 사진 있니?" 하고 물어보는 방식입니다.
+    const MAX_IMAGES_TO_CHECK = 100; 
+    
     async function loadGalleryImages() {
-      let counter = 1;
       let validLinks = [];
+      const imagePromises = [];
 
-      while (true) {
-        const imgPath = `gallery/Photo ${counter}.jpg`;
+      // 1. 모든 이미지 로딩 시도를 동시에(병렬로) 시작
+      for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
+        const imgPath = `gallery/Photo ${i}.jpg`;
         
-        try {
-          // 이미지 파일이 존재하는지 아주 가벼운 HEAD 요청으로 확인
-          const response = await fetch(imgPath, { method: 'HEAD' });
-          
-          if (!response.ok) {
-            break; // 404 에러 등 파일이 없으면 루프 즉시 종료
-          }
-
-          // 파일이 존재하면 즉시 HTML에 태그 생성 (브라우저가 병렬 로딩 시작)
-          const a = document.createElement('a');
-          a.href = imgPath;
-          a.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Gallery Photo ${counter}">`;
-          
-          galleryContainer.appendChild(a);
-          validLinks.push(a);
-          
-          counter++;
-        } catch (error) {
-          // 네트워크 에러 등으로 확인 불가 시 종료
-          break;
-        }
+        const promise = new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve({ index: i, path: imgPath, exists: true });
+          img.onerror = () => resolve({ index: i, path: imgPath, exists: false });
+          img.src = imgPath;
+        });
+        
+        imagePromises.push(promise);
       }
 
-      // 렌더링된 사진들을 모아서 라이트박스 기능 활성화
+      // 2. 모든 결과가 나올 때까지 기다림
+      const results = await Promise.all(imagePromises);
+
+      // 3. 존재하는 사진만 골라서 순서대로 정렬 (병렬 처리 시 섞일 수 있으므로)
+      const existingImages = results
+        .filter(result => result.exists)
+        .sort((a, b) => a.index - b.index);
+
+      // 4. 순서대로 정렬된 사진들을 화면(HTML)에 뿌려줌
+      existingImages.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.path;
+        a.innerHTML = `<img src="${item.path}" loading="lazy" alt="Gallery Photo ${item.index}">`;
+        
+        galleryContainer.appendChild(a);
+        validLinks.push(a);
+      });
+
+      // 5. 로딩 완료 후 라이트박스 기능 활성화
       initLightbox(validLinks);
     }
 
     // 함수 실행
     loadGalleryImages();
 
-    // ---- 라이트박스 동작 로직 ----
+    // ---- 라이트박스 동작 로직 (이전과 동일) ----
     function initLightbox(links) {
       if(links.length === 0) return;
 
