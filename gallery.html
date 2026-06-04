@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gibum Park - Gallery</title>
 
+<!-- FAVICON -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231772d0'/><text x='50' y='72' font-size='62' font-family='Lato,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='white'>G</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,14 +57,14 @@
   .gallery a{
     display:block;aspect-ratio:1/1;overflow:hidden;
     border-radius:6px;border:1px solid var(--line);background:var(--soft);
-    cursor: zoom-in; /* 클릭 가능함을 나타내는 커서 */
+    cursor: zoom-in;
   }
   .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
   .gallery a:hover img{transform:scale(1.06);}
 
-  /* ---- Lightbox (새로 추가된 스타일) ---- */
+  /* ---- Lightbox ---- */
   .lightbox {
-    display: none; /* 기본적으로 숨김 */
+    display: none; 
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -75,7 +76,6 @@
     justify-content: center;
     user-select: none;
   }
-
   .lightbox img {
     max-width: 90%;
     max-height: 90vh;
@@ -83,31 +83,16 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     object-fit: contain;
   }
-
-  /* 닫기 버튼 */
   .lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
+    position: absolute; top: 20px; right: 30px;
+    color: white; font-size: 40px; font-weight: bold;
+    cursor: pointer; transition: color 0.2s;
   }
   .lightbox-close:hover { color: #ccc; }
-
-  /* 좌우 이동 버튼 */
   .lightbox-prev, .lightbox-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 15px;
-    transition: color 0.2s;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: white; font-size: 50px; font-weight: bold;
+    cursor: pointer; padding: 15px; transition: color 0.2s;
   }
   .lightbox-prev { left: 20px; }
   .lightbox-next { right: 20px; }
@@ -131,31 +116,8 @@
   <p style="color:var(--muted); font-size:15px;">A few photos I took for fun.</p>
   <hr>
 
-  <div class="gallery">
-    <a href="gallery/photo1.jpg"><img src="gallery/photo1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo2.jpg"><img src="gallery/photo2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo3.jpg"><img src="gallery/photo3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo4.jpg"><img src="gallery/photo4.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo5.jpg"><img src="gallery/photo5.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo6.jpg"><img src="gallery/photo6.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo7.jpg"><img src="gallery/photo7.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo8.jpg"><img src="gallery/photo8.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo9.jpg"><img src="gallery/photo9.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo10.jpg"><img src="gallery/photo10.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo11.jpg"><img src="gallery/photo11.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo12.jpg"><img src="gallery/photo12.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo13.jpg"><img src="gallery/photo13.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo14.jpg"><img src="gallery/photo14.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo15.jpg"><img src="gallery/photo15.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo16.jpg"><img src="gallery/photo16.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo17.jpg"><img src="gallery/photo17.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo18.jpg"><img src="gallery/photo18.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo19.jpg"><img src="gallery/photo19.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo20.jpg"><img src="gallery/photo20.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo21.jpg"><img src="gallery/photo21.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo22.jpg"><img src="gallery/photo22.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo23.jpg"><img src="gallery/photo23.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-  </div>
+  <!-- HTML 코드를 작성할 필요 없이 완전히 비워둡니다 -->
+  <div class="gallery" id="gallery-container"></div>
 
 </div>
 
@@ -168,74 +130,103 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const galleryLinks = document.querySelectorAll('.gallery a');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.lightbox-close');
-    const prevBtn = document.querySelector('.lightbox-prev');
-    const nextBtn = document.querySelector('.lightbox-next');
-    
-    let currentIndex = 0;
-    
-    // 유효한 이미지만 필터링 (에러로 숨겨진 이미지 제외)
-    const validLinks = Array.from(galleryLinks).filter(link => {
-      const img = link.querySelector('img');
-      return img && img.style.display !== 'none';
-    });
+    const galleryContainer = document.getElementById('gallery-container');
+    let counter = 1;
+    let validLinks = []; // 성공적으로 불러온 사진들을 담을 배열
 
-    // 갤러리 이미지 클릭 이벤트
-    validLinks.forEach((link, index) => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault(); // 새 탭 열기 방지
-        currentIndex = index;
-        updateLightboxImage();
-        lightbox.style.display = 'flex'; // 라이트박스 띄우기
+    // 1번 사진부터 순서대로 불러오는 함수
+    function loadImagesAuto() {
+      const imgPath = `gallery/Photo ${counter}.jpg`;
+      const img = new Image();
+
+      img.onload = function() {
+        // 사진이 존재하면 HTML 요소를 생성해서 화면에 붙임
+        const a = document.createElement('a');
+        a.href = imgPath;
+        
+        const imgElement = document.createElement('img');
+        imgElement.src = imgPath;
+        imgElement.loading = 'lazy';
+        
+        a.appendChild(imgElement);
+        galleryContainer.appendChild(a);
+        
+        validLinks.push(a); // 라이트박스 목록에 추가
+        
+        counter++;
+        loadImagesAuto(); // 다음 번호 사진 시도
+      };
+
+      img.onerror = function() {
+        // 사진이 없어서 에러가 나면 (로딩이 끝났다는 뜻) 라이트박스 기능 활성화
+        initLightbox(validLinks);
+      };
+
+      img.src = imgPath;
+    }
+
+    // 사진 자동 로딩 시작
+    loadImagesAuto();
+
+    // ---- 라이트박스 동작 로직 ----
+    function initLightbox(links) {
+      if(links.length === 0) return; // 사진이 없으면 종료
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = document.querySelector('.lightbox-close');
+      const prevBtn = document.querySelector('.lightbox-prev');
+      const nextBtn = document.querySelector('.lightbox-next');
+      
+      let currentIndex = 0;
+
+      // 이미지 클릭 이벤트 바인딩
+      links.forEach((link, index) => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          currentIndex = index;
+          updateLightboxImage();
+          lightbox.style.display = 'flex';
+        });
       });
-    });
 
-    // 이미지 업데이트 함수
-    function updateLightboxImage() {
-      lightboxImg.src = validLinks[currentIndex].getAttribute('href');
-    }
-
-    // 다음 이미지로
-    function showNext() {
-      currentIndex = (currentIndex + 1) % validLinks.length;
-      updateLightboxImage();
-    }
-
-    // 이전 이미지로
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + validLinks.length) % validLinks.length;
-      updateLightboxImage();
-    }
-
-    // 라이트박스 닫기
-    function closeLightbox() {
-      lightbox.style.display = 'none';
-      lightboxImg.src = '';
-    }
-
-    // 버튼 클릭 이벤트 바인딩
-    nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
-    prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
-    closeBtn.addEventListener('click', closeLightbox);
-    
-    // 배경 클릭시 닫기 (이미지 클릭시엔 안닫힘)
-    lightbox.addEventListener('click', function(e) {
-      if (e.target === lightbox) {
-        closeLightbox();
+      function updateLightboxImage() {
+        lightboxImg.src = links[currentIndex].getAttribute('href');
       }
-    });
 
-    // 키보드 조작 지원 (좌/우 화살표, ESC 닫기)
-    document.addEventListener('keydown', function(e) {
-      if (lightbox.style.display === 'flex') {
-        if (e.key === 'ArrowRight') showNext();
-        if (e.key === 'ArrowLeft') showPrev();
-        if (e.key === 'Escape') closeLightbox();
+      function showNext() {
+        currentIndex = (currentIndex + 1) % links.length;
+        updateLightboxImage();
       }
-    });
+
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + links.length) % links.length;
+        updateLightboxImage();
+      }
+
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+      }
+
+      nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+      prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+      closeBtn.addEventListener('click', closeLightbox);
+      
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === 'ArrowRight') showNext();
+          if (e.key === 'ArrowLeft') showPrev();
+          if (e.key === 'Escape') closeLightbox();
+        }
+      });
+    }
   });
 </script>
 
