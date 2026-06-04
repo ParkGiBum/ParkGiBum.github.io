@@ -6,19 +6,12 @@
 <title>Gibum Park</title>
 <meta name="description" content="Gibum Park — Ph.D. candidate at Seoul National University. LLM serving systems, mobile-cloud collaborative inference.">
 
-<!-- FAVICON: 파란 사각형 + 흰 'G'. 이미지로 바꾸려면 favicon.png 넣고 아래 한 줄을
-     <link rel="icon" href="favicon.png"> 로 교체하세요. -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231772d0'/><text x='50' y='72' font-size='62' font-family='Lato,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='white'>G</text></svg>">
+<meta property="og:title" content="Gibum Park - Homepage">
+<meta property="og:description" content="Ph.D. candidate at Seoul National University.">
+<meta property="og:image" content="og-thumbnail.jpg"> 
+<meta property="og:url" content="https://parkgibum.github.io/">
 
-<!-- ============================================================
-     EDIT GUIDE (수정 안내)
-     - 프로필 사진: profile.jpg  (홈페이지 폴더 최상단)
-     - 논문 썸네일: thumbnails/ 폴더 안에 아래 이름 그대로 넣기
-         sail.png / ouroboros.png / prc.png / aspen.png / cache.png / vit.png
-     - 갤러리 사진: gallery/ 폴더 안에 photo1.jpg, photo2.jpg ... 순서대로 넣기
-         사진 추가는 Gallery 섹션의 <a>...</a> 한 줄을 복사해서 숫자만 바꾸면 됨
-     - favicon: 위 <link rel="icon"> 한 줄. 이미지로 바꾸려면 favicon.png 사용
-     ============================================================ -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231772d0'/><text x='50' y='72' font-size='62' font-family='Lato,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='white'>G</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,6 +47,22 @@
   .intro-text p{margin-top:14px;color:var(--ink);}
   .intro-links{margin-top:16px;font-size:15.5px;}
   .intro-links a{white-space:nowrap;}
+  
+  /* ★ 갤러리 버튼 강조 스타일 */
+  .btn-gallery {
+    display: inline-block;
+    background-color: var(--soft);
+    border: 1px solid var(--line);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .btn-gallery:hover {
+    background-color: #e2e8f0;
+    text-decoration: none;
+  }
+
   .sep{color:var(--faint);margin:0 6px;}
   .intro-photo{flex:0 0 auto;}
   .intro-photo img{
@@ -94,19 +103,6 @@
 
   .skills span{font-weight:700;}
 
-  /* ---- gallery ---- */
-  .gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-    gap:10px;
-  }
-  .gallery a{
-    display:block;aspect-ratio:1/1;overflow:hidden;
-    border-radius:6px;border:1px solid var(--line);background:var(--soft);
-  }
-  .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
-  .gallery a:hover img{transform:scale(1.06);}
-
   footer{margin-top:8px;font-size:13.5px;color:var(--faint);text-align:center;}
 
   @media (max-width:600px){
@@ -115,14 +111,12 @@
     .intro-photo img{width:140px;height:140px;}
     .pub{flex-direction:column;gap:12px;}
     .thumb{width:100%;flex-basis:auto;max-width:280px;aspect-ratio:16/9;}
-    .gallery{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ===================== INTRO ===================== -->
   <div class="intro">
     <div class="intro-text">
       <h1>Gibum Park<span class="ko"></span></h1>
@@ -139,6 +133,7 @@
         <a href="https://github.com/ParkGiBum" target="_blank" rel="noopener">GitHub</a><span class="sep">/</span>
         <a href="https://www.linkedin.com/in/gibum-park-88090a256/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">/</span>
         <a href="CV.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="gallery.html" class="btn-gallery">📷 Photo Gallery</a>
       </p>
     </div>
     <div class="intro-photo">
@@ -148,7 +143,6 @@
 
   <hr>
 
-  <!-- ===================== RESEARCH ===================== -->
   <h2>Research</h2>
   <p class="blurb">
     My research focuses on <strong>LLM serving systems</strong> and
@@ -160,7 +154,6 @@
 
   <hr>
 
-  <!-- ===================== PUBLICATIONS ===================== -->
   <h2>Publications</h2>
 
   <div class="pub">
@@ -209,7 +202,6 @@
 
   <hr>
 
-  <!-- ===================== POSTERS ===================== -->
   <h2>Posters &amp; Extended Abstracts</h2>
 
   <div class="pub">
@@ -236,7 +228,6 @@
 
   <hr>
 
-  <!-- ===================== NEWS ===================== -->
   <h2>News</h2>
   <div class="row"><span class="what">Presenting SAIL at MobiSys 2026 (Jun 21–25), Cambridge, UK</span><span class="when">2026.06</span></div>
   <div class="row"><span class="what">SAIL &amp; Ouroboros accepted to MobiSys 2026; PRC accepted to CoNEXT 2026</span><span class="when">2026.02</span></div>
@@ -244,7 +235,6 @@
 
   <hr>
 
-  <!-- ===================== HONORS ===================== -->
   <h2>Honors &amp; Awards</h2>
   <div class="row"><span class="what">Samsung HumanTech Paper Award</span><span class="when">Feb 2026</span><span class="sub">Communication &amp; Networks — for SAIL</span></div>
   <div class="row"><span class="what">Samsung HumanTech Paper Award</span><span class="when">Feb 2026</span><span class="sub">Computer Science &amp; Engineering — for Ouroboros</span></div>
@@ -252,7 +242,6 @@
 
   <hr>
 
-  <!-- ===================== EXPERIENCE ===================== -->
   <h2>Experience</h2>
   <div class="row"><span class="what">Industry Research Collaborator — Hanwha Systems</span><span class="when">Mar 2023 – Present</span><span class="sub">Three-axis decision framework (rule-based evaluation, MLP-based priority identification, RL-to-LLM transfer) for situation assessment in multi-agent simulation environments.</span></div>
   <div class="row"><span class="what">Teaching Assistant — Intro. to Data Communication Networks, SNU</span><span class="when">Fall 2022</span><span class="sub">Designed programming projects, ran lab sessions, managed evaluation. Lecturer: Prof. Kyunghan Lee.</span></div>
@@ -261,14 +250,12 @@
 
   <hr>
 
-  <!-- ===================== EDUCATION ===================== -->
   <h2>Education</h2>
   <div class="row"><span class="what">Ph.D. / M.S. Combined, Electrical &amp; Computer Engineering</span><span class="when">Mar 2022 – Present</span><span class="sub">Seoul National University · Advised by Prof. Kyunghan Lee</span></div>
   <div class="row"><span class="what">B.S., Electrical &amp; Computer Engineering</span><span class="when">Mar 2016 – Feb 2022</span><span class="sub">Seoul National University · Two-year military service (ROK Air Force Sergeant, discharged)</span></div>
 
   <hr>
 
-  <!-- ===================== PATENT + SKILLS ===================== -->
   <h2>Patent &amp; Skills</h2>
   <p class="blurb" style="font-size:15px;color:var(--muted);">
     Collaborative AI inference method and system for base station, cloud server, and terminal based on information
@@ -277,39 +264,6 @@
   <p class="blurb skills" style="margin-top:10px;font-size:15px;">
     <span>Languages:</span> C / C++, Python, CUDA, Verilog &nbsp;·&nbsp; <span>ML:</span> PyTorch (custom module &amp; kernel development)
   </p>
-
-  <hr>
-
-  <!-- ===================== GALLERY ===================== -->
-  <!-- 사진 추가: 아래 <a>...</a> 한 줄을 복사해서 photoN.jpg 숫자만 바꾸세요.
-       gallery/ 폴더에 photo1.jpg, photo2.jpg ... 이름으로 넣으면 됩니다. -->
-  <h2>Gallery</h2>
-  <p class="blurb" style="font-size:15px;color:var(--muted);margin-bottom:16px;">A few photos I took for fun.</p>
-  <div class="gallery">
-    <a href="gallery/photo1.jpg" target="_blank" rel="noopener"><img src="gallery/photo1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo2.jpg" target="_blank" rel="noopener"><img src="gallery/photo2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo3.jpg" target="_blank" rel="noopener"><img src="gallery/photo3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo4.jpg" target="_blank" rel="noopener"><img src="gallery/photo4.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo5.jpg" target="_blank" rel="noopener"><img src="gallery/photo5.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo6.jpg" target="_blank" rel="noopener"><img src="gallery/photo6.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo7.jpg" target="_blank" rel="noopener"><img src="gallery/photo7.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo8.jpg" target="_blank" rel="noopener"><img src="gallery/photo8.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo9.jpg" target="_blank" rel="noopener"><img src="gallery/photo9.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo10.jpg" target="_blank" rel="noopener"><img src="gallery/photo10.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo11.jpg" target="_blank" rel="noopener"><img src="gallery/photo11.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo12.jpg" target="_blank" rel="noopener"><img src="gallery/photo12.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo13.jpg" target="_blank" rel="noopener"><img src="gallery/photo13.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo14.jpg" target="_blank" rel="noopener"><img src="gallery/photo14.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo15.jpg" target="_blank" rel="noopener"><img src="gallery/photo15.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo16.jpg" target="_blank" rel="noopener"><img src="gallery/photo16.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo17.jpg" target="_blank" rel="noopener"><img src="gallery/photo17.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo18.jpg" target="_blank" rel="noopener"><img src="gallery/photo18.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo19.jpg" target="_blank" rel="noopener"><img src="gallery/photo19.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo20.jpg" target="_blank" rel="noopener"><img src="gallery/photo20.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo21.jpg" target="_blank" rel="noopener"><img src="gallery/photo21.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo22.jpg" target="_blank" rel="noopener"><img src="gallery/photo22.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-    <a href="gallery/photo23.jpg" target="_blank" rel="noopener"><img src="gallery/photo23.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
-  </div>
 
   <hr>
 
