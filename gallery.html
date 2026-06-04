@@ -127,7 +127,6 @@
   <img id="lightbox-img" src="">
   <span class="lightbox-next">&#10095;</span>
 </div>
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
@@ -142,7 +141,7 @@
 
       // 1. 모든 이미지 로딩 시도를 동시에(병렬로) 시작
       for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
-        const imgPath = `gallery/Photo ${i}.jpg`;
+        const imgPath = `gallery/photo${i}.jpg`;
         
         const promise = new Promise((resolve) => {
           const img = new Image();
@@ -166,7 +165,7 @@
       existingImages.forEach(item => {
         const a = document.createElement('a');
         a.href = item.path;
-        a.innerHTML = `<img src="${item.path}" loading="lazy" alt="Gallery Photo ${item.index}">`;
+        a.innerHTML = `<img src="${item.path}" loading="lazy" alt="Gallery photo${item.index}">`;
         
         galleryContainer.appendChild(a);
         validLinks.push(a);
