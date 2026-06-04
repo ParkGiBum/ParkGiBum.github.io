@@ -131,46 +131,48 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
-    let counter = 1;
-    let validLinks = []; // 성공적으로 불러온 사진들을 담을 배열
+    
+    // 사진 존재 여부를 빠르게(HEAD 요청) 확인하고 병렬로 렌더링하는 함수
+    async function loadGalleryImages() {
+      let counter = 1;
+      let validLinks = [];
 
-    // 1번 사진부터 순서대로 불러오는 함수
-    function loadImagesAuto() {
-      const imgPath = `gallery/photo${counter}.jpg`;
-      const img = new Image();
+      while (true) {
+        const imgPath = `gallery/Photo ${counter}.jpg`;
+        
+        try {
+          // 이미지 파일이 존재하는지 아주 가벼운 HEAD 요청으로 확인
+          const response = await fetch(imgPath, { method: 'HEAD' });
+          
+          if (!response.ok) {
+            break; // 404 에러 등 파일이 없으면 루프 즉시 종료
+          }
 
-      img.onload = function() {
-        // 사진이 존재하면 HTML 요소를 생성해서 화면에 붙임
-        const a = document.createElement('a');
-        a.href = imgPath;
-        
-        const imgElement = document.createElement('img');
-        imgElement.src = imgPath;
-        imgElement.loading = 'lazy';
-        
-        a.appendChild(imgElement);
-        galleryContainer.appendChild(a);
-        
-        validLinks.push(a); // 라이트박스 목록에 추가
-        
-        counter++;
-        loadImagesAuto(); // 다음 번호 사진 시도
-      };
+          // 파일이 존재하면 즉시 HTML에 태그 생성 (브라우저가 병렬 로딩 시작)
+          const a = document.createElement('a');
+          a.href = imgPath;
+          a.innerHTML = `<img src="${imgPath}" loading="lazy" alt="Gallery Photo ${counter}">`;
+          
+          galleryContainer.appendChild(a);
+          validLinks.push(a);
+          
+          counter++;
+        } catch (error) {
+          // 네트워크 에러 등으로 확인 불가 시 종료
+          break;
+        }
+      }
 
-      img.onerror = function() {
-        // 사진이 없어서 에러가 나면 (로딩이 끝났다는 뜻) 라이트박스 기능 활성화
-        initLightbox(validLinks);
-      };
-
-      img.src = imgPath;
+      // 렌더링된 사진들을 모아서 라이트박스 기능 활성화
+      initLightbox(validLinks);
     }
 
-    // 사진 자동 로딩 시작
-    loadImagesAuto();
+    // 함수 실행
+    loadGalleryImages();
 
     // ---- 라이트박스 동작 로직 ----
     function initLightbox(links) {
-      if(links.length === 0) return; // 사진이 없으면 종료
+      if(links.length === 0) return;
 
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -180,7 +182,6 @@
       
       let currentIndex = 0;
 
-      // 이미지 클릭 이벤트 바인딩
       links.forEach((link, index) => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
@@ -229,6 +230,5 @@
     }
   });
 </script>
-
 </body>
 </html>
