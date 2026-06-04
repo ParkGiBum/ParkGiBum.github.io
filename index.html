@@ -6,17 +6,18 @@
 <title>Gibum Park</title>
 <meta name="description" content="Gibum Park — Ph.D. candidate at Seoul National University. LLM serving systems, mobile-cloud collaborative inference.">
 
+<!-- FAVICON: 파란 사각형 + 흰 'G'. 이미지로 바꾸려면 favicon.png 넣고 아래 한 줄을
+     <link rel="icon" href="favicon.png"> 로 교체하세요. -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231772d0'/><text x='50' y='72' font-size='62' font-family='Lato,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='white'>G</text></svg>">
+
 <!-- ============================================================
      EDIT GUIDE (수정 안내)
      - 프로필 사진: profile.jpg  (홈페이지 폴더 최상단)
      - 논문 썸네일: thumbnails/ 폴더 안에 아래 이름 그대로 넣기
-         thumbnails/sail.png      (SAIL)
-         thumbnails/ouroboros.png (Ouroboros)
-         thumbnails/prc.png       (PRC)
-         thumbnails/aspen.png     (ASPEN)
-         thumbnails/cache.png     (Selective Semantic Cache Transfer 포스터)
-         thumbnails/vit.png       (Accelerating Offloaded ViT 포스터)
-     - 이미지 없으면 회색 빈 박스로 보입니다 (정상). 넣으면 자동 표시.
+         sail.png / ouroboros.png / prc.png / aspen.png / cache.png / vit.png
+     - 갤러리 사진: gallery/ 폴더 안에 photo1.jpg, photo2.jpg ... 순서대로 넣기
+         사진 추가는 Gallery 섹션의 <a>...</a> 한 줄을 복사해서 숫자만 바꾸면 됨
+     - favicon: 위 <link rel="icon"> 한 줄. 이미지로 바꾸려면 favicon.png 사용
      ============================================================ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,6 +94,19 @@
 
   .skills span{font-weight:700;}
 
+  /* ---- gallery ---- */
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:10px;
+  }
+  .gallery a{
+    display:block;aspect-ratio:1/1;overflow:hidden;
+    border-radius:6px;border:1px solid var(--line);background:var(--soft);
+  }
+  .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
+  .gallery a:hover img{transform:scale(1.06);}
+
   footer{margin-top:8px;font-size:13.5px;color:var(--faint);text-align:center;}
 
   @media (max-width:600px){
@@ -101,6 +115,7 @@
     .intro-photo img{width:140px;height:140px;}
     .pub{flex-direction:column;gap:12px;}
     .thumb{width:100%;flex-basis:auto;max-width:280px;aspect-ratio:16/9;}
+    .gallery{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
   }
 </style>
 </head>
@@ -262,6 +277,22 @@
   <p class="blurb skills" style="margin-top:10px;font-size:15px;">
     <span>Languages:</span> C / C++, Python, CUDA, Verilog &nbsp;·&nbsp; <span>ML:</span> PyTorch (custom module &amp; kernel development)
   </p>
+
+  <hr>
+
+  <!-- ===================== GALLERY ===================== -->
+  <!-- 사진 추가: 아래 <a>...</a> 한 줄을 복사해서 photoN.jpg 숫자만 바꾸세요.
+       gallery/ 폴더에 photo1.jpg, photo2.jpg ... 이름으로 넣으면 됩니다. -->
+  <h2>Gallery</h2>
+  <p class="blurb" style="font-size:15px;color:var(--muted);margin-bottom:16px;">A few photos I took for fun.</p>
+  <div class="gallery">
+    <a href="gallery/photo1.jpg" target="_blank" rel="noopener"><img src="gallery/photo1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <a href="gallery/photo2.jpg" target="_blank" rel="noopener"><img src="gallery/photo2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <a href="gallery/photo3.jpg" target="_blank" rel="noopener"><img src="gallery/photo3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <a href="gallery/photo4.jpg" target="_blank" rel="noopener"><img src="gallery/photo4.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <a href="gallery/photo5.jpg" target="_blank" rel="noopener"><img src="gallery/photo5.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+    <a href="gallery/photo6.jpg" target="_blank" rel="noopener"><img src="gallery/photo6.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></a>
+  </div>
 
   <hr>
 
