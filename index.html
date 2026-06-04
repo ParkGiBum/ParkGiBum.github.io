@@ -186,6 +186,12 @@
     background:rgba(168,67,28,.08);
     padding:1px 8px;border-radius:20px;
   }
+  .entry .title a{
+    color:inherit;text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;
+  }
+  .entry .title a:hover{color:var(--accent);border-color:var(--accent-soft);}
 
   /* ---- news ---- */
   .news li{
@@ -272,12 +278,11 @@
   </header>
 
   <!-- ===================== LINKS ===================== -->
-  <!-- FILL-IN: 본인 주소로 바꾸세요. 없는 건 줄 통째로 지우면 됩니다. -->
   <div class="links">
     <a href="mailto:gibumpark@snu.ac.kr">Email</a>
-    <a href="FILL-IN-google-scholar-url" target="_blank" rel="noopener">Google Scholar</a>
-    <a href="https://github.com/FILL-IN" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://www.linkedin.com/in/FILL-IN" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://scholar.google.com/citations?user=w1Ux9G8AAAAJ&hl=ko" target="_blank" rel="noopener">Google Scholar</a>
+    <a href="https://github.com/ParkGiBum" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/gibum-park-88090a256/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
   </div>
 
@@ -288,7 +293,6 @@
       <li><span class="date">2026.06</span><span>Presenting <em>SAIL</em> at <strong>MobiSys 2026</strong> in Cambridge, UK.</span></li>
       <li><span class="date">2026.02</span><span>Two papers (<em>SAIL</em>, <em>Ouroboros</em>) accepted to <strong>MobiSys 2026</strong>.</span></li>
       <li><span class="date">2026.02</span><span>Received two <strong>Samsung HumanTech Paper Awards</strong> (SAIL, Ouroboros).</span></li>
-      <li><span class="date">2025.10</span><span>Filed a Korean patent on collaborative AI inference across base station, cloud, and terminal.</span></li>
     </ul>
   </section>
 
@@ -307,27 +311,27 @@
     <h2>Publications</h2>
 
     <div class="entry">
-      <div class="title">SAIL: Redesigning Collaborative Language Inference with a Single Server-to-Mobile Handoff</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.1145/3745756.3809224" target="_blank" rel="noopener">SAIL: Redesigning Collaborative Language Inference with a Single Server-to-Mobile Handoff</a></div>
       <div class="authors"><span class="author-me">Gibum Park</span>, Sanghyun Han, Sangtae Ha, Yonghwa Cho, Chanjeong Park, Kyunghan Lee</div>
-      <div class="venue"><span>MobiSys 2026</span><span class="badge">Accept. 22.4%</span></div>
+      <div class="venue"><span>MobiSys 2026</span><span class="badge">Acceptance Rate 22.4%</span></div>
     </div>
 
     <div class="entry">
-      <div class="title">Ouroboros: Instilling Motion Awareness in ViTs for Efficient Video Analytics on the Edge</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.1145/3745756.3809212" target="_blank" rel="noopener">Ouroboros: Instilling Motion Awareness in ViTs for Efficient Video Analytics on the Edge</a></div>
       <div class="authors">Chanjeong Park, Donggyu Yang, Sooyoung Kwon, <span class="author-me">Gibum Park</span>, Carlee Joe-Wong, Kyunghan Lee</div>
-      <div class="venue"><span>MobiSys 2026</span><span class="badge">Accept. 22.4%</span></div>
+      <div class="venue"><span>MobiSys 2026</span><span class="badge">Acceptance Rate 22.4%</span></div>
     </div>
 
     <div class="entry">
-      <div class="title">PRC: Process-centric Rate Control for Transient Stragglers in Hybrid-Parallel Training</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.1145/3808669" target="_blank" rel="noopener">PRC: Process-centric Rate Control for Transient Stragglers in Hybrid-Parallel Training</a></div>
       <div class="authors">Taekyoung Han, Daewook Hwang, Shinik Park, Donggyu Yang, <span class="author-me">Gibum Park</span>, Sanghyun Han, Jaeyoon Hwang, Byunggu Kang, Sangtae Ha, Kyunghan Lee</div>
-      <div class="venue"><span>CoNEXT 2026</span><span class="badge">Accept. 12%</span></div>
+      <div class="venue"><span>CoNEXT 2026</span><span class="badge">Acceptance Rate 12%</span></div>
     </div>
 
     <div class="entry">
-      <div class="title">ASPEN: Breaking Operator Barriers for Efficient Parallelization of Deep Neural Networks</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.5555/3666122.3669124" target="_blank" rel="noopener">ASPEN: Breaking Operator Barriers for Efficient Parallelization of Deep Neural Networks</a></div>
       <div class="authors">Jongseok Park, Kyungmin Bin, <span class="author-me">Gibum Park</span>, Sangtae Ha, Kyunghan Lee</div>
-      <div class="venue"><span>NeurIPS 2023</span><span class="badge">Accept. 26.1%</span></div>
+      <div class="venue"><span>NeurIPS 2023</span><span class="badge">Acceptance Rate 26.1%</span></div>
     </div>
   </section>
 
@@ -336,13 +340,13 @@
     <h2>Posters &amp; Extended Abstracts</h2>
 
     <div class="entry">
-      <div class="title">Selective Semantic Cache Transfer for Mobile-Cloud LLM Inference</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.1145/3812835.3814861" target="_blank" rel="noopener">Selective Semantic Cache Transfer for Mobile-Cloud LLM Inference</a></div>
       <div class="authors"><span class="author-me">Gibum Park</span>, Sanghyun Han, Yonghwa Cho, Chanjeong Park, Kyunghan Lee</div>
       <div class="venue"><span>MobiSys 2026 — Poster Session</span></div>
     </div>
 
     <div class="entry">
-      <div class="title">Accelerating Offloaded ViT Inference via Progressive Refinement</div>
+      <div class="title"><a href="https://dl.acm.org/doi/10.1145/3812835.3814856" target="_blank" rel="noopener">Accelerating Offloaded ViT Inference via Progressive Refinement</a></div>
       <div class="authors">Chanjeong Park, <span class="author-me">Gibum Park</span>, Carlee Joe-Wong, Kyunghan Lee</div>
       <div class="venue"><span>MobiSys 2026 — Poster Session</span></div>
     </div>
