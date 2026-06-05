@@ -36,7 +36,6 @@
   .back-btn{font-size:15px;font-weight:700;color:var(--muted);}
   hr{border:none;border-top:1px solid var(--line);margin:20px 0 30px;}
 
-  /* sort toggle */
   .sort-bar{display:flex;gap:8px;margin-bottom:20px;}
   .sort-btn{
     font-size:13.5px;font-family:var(--sans);
@@ -47,16 +46,19 @@
   .sort-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
   .sort-btn:hover:not(.active){background:#e2e8f0;}
 
-  /* masonry via CSS columns */
-  .masonry{columns:3;column-gap:8px;}
+  /* Masonry.js */
+  .masonry{position:relative;}
+  .masonry-sizer,
+  .masonry-item{width:calc(33.333% - 6px);}
   .masonry-item{
-    break-inside:avoid;margin-bottom:8px;
+    float:left;margin-bottom:8px;
     cursor:zoom-in;display:block;
     border-radius:6px;overflow:hidden;
     border:1px solid var(--line);background:var(--soft);
   }
   .masonry-item img{width:100%;height:auto;display:block;transition:transform .35s ease;}
   .masonry-item:hover img{transform:scale(1.04);}
+  .masonry-item.wide{width:calc(66.666% - 3px);}
 
   /* Lightbox */
   .lightbox{
@@ -82,7 +84,7 @@
 
   @media(max-width:600px){
     .wrap{padding:40px 18px 64px;}
-    .masonry{columns:2;}
+    .masonry-sizer,.masonry-item{width:calc(50% - 4px);}
     .lightbox-prev,.lightbox-next{font-size:30px;padding:10px;}
   }
 </style>
@@ -103,7 +105,9 @@
     <button class="sort-btn" data-mode="color">By color</button>
   </div>
 
-  <div class="masonry" id="gallery-container"></div>
+  <div class="masonry" id="gallery-container">
+    <div class="masonry-sizer"></div>
+  </div>
 
 </div>
 
@@ -114,31 +118,49 @@
   <span class="lightbox-next">&#10095;</span>
 </div>
 
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script src="gallery/output/order.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('gallery-container');
     const total = typeof GALLERY_TOTAL !== 'undefined' ? GALLERY_TOTAL : 100;
+    const wideSet = typeof GALLERY_WIDE !== 'undefined' ? GALLERY_WIDE : new Set();
     const colorOrder = typeof GALLERY_COLOR_ORDER !== 'undefined' ? [...GALLERY_COLOR_ORDER].reverse() : null;
     const dateOrder = Array.from({length: total}, (_, i) => total - i);
 
+    let msnry = new Masonry(container, {
+      itemSelector: '.masonry-item',
+      columnWidth: '.masonry-sizer',
+      percentPosition: true,
+      gutter: 8,
+      transitionDuration: '0.2s'
+    });
+
     function buildGallery(order) {
-      container.innerHTML = '';
+      // 기존 아이템 제거 (sizer 제외)
+      const oldItems = container.querySelectorAll('.masonry-item');
+      msnry.remove(oldItems);
+
+      const newItems = [];
       order.forEach(n => {
         const a = document.createElement('a');
         a.className = 'masonry-item';
         a.href = encodeURI(`gallery/output/Photo ${n}.jpg`);
-        a.dataset.n = n;
 
         const img = document.createElement('img');
         img.src = encodeURI(`gallery/output/thumb_Photo ${n}.jpg`);
         img.loading = 'lazy';
         img.alt = '';
-        img.onerror = () => a.remove();
+        img.onerror = () => { msnry.remove([a]); msnry.layout(); };
 
         a.appendChild(img);
         container.appendChild(a);
+        newItems.push(a);
       });
+
+      msnry.appended(newItems);
+      imagesLoaded(container, () => msnry.layout());
     }
 
     buildGallery(dateOrder);
