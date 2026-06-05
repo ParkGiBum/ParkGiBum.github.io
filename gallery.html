@@ -34,7 +34,6 @@
   .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
   h1{font-size:30px;font-weight:900;letter-spacing:-.01em;}
   .back-btn{font-size:15px;font-weight:700;color:var(--muted);}
-
   hr{border:none;border-top:1px solid var(--line);margin:20px 0 30px;}
 
   /* sort toggle */
@@ -121,8 +120,6 @@
     const container = document.getElementById('gallery-container');
     const total = typeof GALLERY_TOTAL !== 'undefined' ? GALLERY_TOTAL : 100;
     const colorOrder = typeof GALLERY_COLOR_ORDER !== 'undefined' ? [...GALLERY_COLOR_ORDER].reverse() : null;
-
-    // date order = total..1 (oldest first)
     const dateOrder = Array.from({length: total}, (_, i) => total - i);
 
     function buildGallery(order) {
@@ -146,16 +143,11 @@
 
     buildGallery(dateOrder);
 
-    // sort buttons
     document.querySelectorAll('.sort-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        if (this.dataset.mode === 'color' && colorOrder) {
-          buildGallery(colorOrder);
-        } else {
-          buildGallery(dateOrder);
-        }
+        buildGallery(this.dataset.mode === 'color' && colorOrder ? colorOrder : dateOrder);
       });
     });
 
@@ -178,10 +170,7 @@
       lightboxImg.src = currentLinks[currentIndex].getAttribute('href');
       lightbox.style.display = 'flex';
     }
-    function closeLightbox() {
-      lightbox.style.display = 'none';
-      lightboxImg.src = '';
-    }
+    function closeLightbox() { lightbox.style.display = 'none'; lightboxImg.src = ''; }
     function next() { currentIndex = (currentIndex + 1) % currentLinks.length; openLightbox(); }
     function prev() { currentIndex = (currentIndex - 1 + currentLinks.length) % currentLinks.length; openLightbox(); }
 
