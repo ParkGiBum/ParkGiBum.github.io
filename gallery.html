@@ -120,10 +120,10 @@
   document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('gallery-container');
     const total = typeof GALLERY_TOTAL !== 'undefined' ? GALLERY_TOTAL : 100;
-    const colorOrder = typeof GALLERY_COLOR_ORDER !== 'undefined' ? GALLERY_COLOR_ORDER : null;
+    const colorOrder = typeof GALLERY_COLOR_ORDER !== 'undefined' ? [...GALLERY_COLOR_ORDER].reverse() : null;
 
-    // date order = 1..total
-    const dateOrder = Array.from({length: total}, (_, i) => i + 1);
+    // date order = total..1 (oldest first)
+    const dateOrder = Array.from({length: total}, (_, i) => total - i);
 
     function buildGallery(order) {
       container.innerHTML = '';
