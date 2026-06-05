@@ -58,7 +58,6 @@
   }
   .masonry-item img{width:100%;height:auto;display:block;transition:transform .35s ease;}
   .masonry-item:hover img{transform:scale(1.04);}
-  .masonry-item.wide{width:calc(66.666% - 3px);}
 
   /* Lightbox */
   .lightbox{
@@ -125,7 +124,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('gallery-container');
     const total = typeof GALLERY_TOTAL !== 'undefined' ? GALLERY_TOTAL : 100;
-    const wideSet = typeof GALLERY_WIDE !== 'undefined' ? GALLERY_WIDE : new Set();
     const colorOrder = typeof GALLERY_COLOR_ORDER !== 'undefined' ? [...GALLERY_COLOR_ORDER].reverse() : null;
     const dateOrder = Array.from({length: total}, (_, i) => total - i);
 
@@ -138,7 +136,6 @@
     });
 
     function buildGallery(order) {
-      // 기존 아이템 제거 (sizer 제외)
       const oldItems = container.querySelectorAll('.masonry-item');
       msnry.remove(oldItems);
 
