@@ -129,112 +129,90 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
-    
-    // 최대 몇 번까지 사진을 검사할지 설정
-    const MAX_IMAGES_TO_CHECK = 100; 
-    
-    async function loadGalleryImages() {
-      let validLinks = [];
-      const imagePromises = [];
+    const MAX_IMAGES = 100; // 넉넉하게 100장 세팅
 
-      // 1. 모든 이미지 로딩 시도를 동시에(병렬로) 시작
-      for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
-        // 파일 이름 형식: photo1.jpg, photo2.jpg ...
-        const imgPath = `gallery/photo${i}.jpg`;
-        
-        const promise = new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve({ index: i, path: imgPath, exists: true });
-          img.onerror = () => resolve({ index: i, path: imgPath, exists: false });
-          img.src = imgPath;
-        });
-        
-        imagePromises.push(promise);
-      }
+    // 1. 화면에 보이지 않는 사진은 다운로드하지 않고, 틀만 순식간에 만듭니다.
+    for (let i = 1; i <= MAX_IMAGES; i++) {
+      const a = document.createElement('a');
+      
+      // ★ 중요: 실제 변환하신 파일 이름의 대소문자와 띄어쓰기를 정확히 맞춰주세요.
+      // (예: photo1.jpg 라면 아래처럼, Photo 1.jpg 라면 `gallery/Photo ${i}.jpg` 로 수정)
+      const imgPath = `gallery/photo${i}.jpg`; 
+      a.href = imgPath;
 
-      // 2. 모든 결과가 나올 때까지 기다림
-      const results = await Promise.all(imagePromises);
+      const img = document.createElement('img');
+      img.src = imgPath;
+      img.loading = "lazy"; // 핵심: 스크롤이 도달해야만 다운로드 시작
+      img.alt = "";
 
-      // 3. 존재하는 사진만 골라서 순서대로 정렬
-      const existingImages = results
-        .filter(result => result.exists)
-        .sort((a, b) => a.index - b.index);
+      // 2. 만약 파일이 존재하지 않아서 엑스박스가 뜨면, 해당 태그를 조용히 삭제합니다.
+      img.onerror = function() {
+        a.remove();
+      };
 
-      // 4. 순서대로 정렬된 사진들을 화면에 렌더링
-      existingImages.forEach(item => {
-        const a = document.createElement('a');
-        a.href = item.path;
-        a.innerHTML = `<img src="${item.path}" loading="lazy" alt="Gallery photo${item.index}">`;
-        
-        galleryContainer.appendChild(a);
-        validLinks.push(a);
-      });
-
-      // 5. 로딩 완료 후 라이트박스 기능 활성화
-      initLightbox(validLinks);
+      a.appendChild(img);
+      galleryContainer.appendChild(a);
     }
 
-    // 함수 실행
-    loadGalleryImages();
+    // ---- 라이트박스 로직 ----
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
 
-    // ---- 라이트박스 동작 로직 ----
-    function initLightbox(links) {
-      if(links.length === 0) return;
+    let currentIndex = 0;
+    let currentLinks = [];
 
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const closeBtn = document.querySelector('.lightbox-close');
-      const prevBtn = document.querySelector('.lightbox-prev');
-      const nextBtn = document.querySelector('.lightbox-next');
-      
-      let currentIndex = 0;
+    // 클릭하는 순간에 남아있는 유효한 사진들만 모아서 라이트박스를 엽니다.
+    galleryContainer.addEventListener('click', function(e) {
+      const clickedLink = e.target.closest('a');
+      if (!clickedLink) return;
+      e.preventDefault();
 
-      links.forEach((link, index) => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          currentIndex = index;
-          updateLightboxImage();
-          lightbox.style.display = 'flex';
-        });
-      });
+      currentLinks = Array.from(galleryContainer.querySelectorAll('a'));
+      currentIndex = currentLinks.indexOf(clickedLink);
 
-      function updateLightboxImage() {
-        lightboxImg.src = links[currentIndex].getAttribute('href');
-      }
+      updateLightboxImage();
+      lightbox.style.display = 'flex';
+    });
 
-      function showNext() {
-        currentIndex = (currentIndex + 1) % links.length;
-        updateLightboxImage();
-      }
-
-      function showPrev() {
-        currentIndex = (currentIndex - 1 + links.length) % links.length;
-        updateLightboxImage();
-      }
-
-      function closeLightbox() {
-        lightbox.style.display = 'none';
-        lightboxImg.src = '';
-      }
-
-      nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
-      prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
-      closeBtn.addEventListener('click', closeLightbox);
-      
-      lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (lightbox.style.display === 'flex') {
-          if (e.key === 'ArrowRight') showNext();
-          if (e.key === 'ArrowLeft') showPrev();
-          if (e.key === 'Escape') closeLightbox();
-        }
-      });
+    function updateLightboxImage() {
+      lightboxImg.src = currentLinks[currentIndex].getAttribute('href');
     }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % currentLinks.length;
+      updateLightboxImage();
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + currentLinks.length) % currentLinks.length;
+      updateLightboxImage();
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    }
+
+    nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+    prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
   });
 </script>
 </body>
