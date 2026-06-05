@@ -129,23 +129,24 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
-    const MAX_IMAGES = 100; // 넉넉하게 100장 세팅
+    const MAX_IMAGES = 100; 
 
-    // 1. 화면에 보이지 않는 사진은 다운로드하지 않고, 틀만 순식간에 만듭니다.
+    // 1. 화면에 보이지 않는 사진은 다운로드하지 않고, 썸네일 틀만 순식간에 만듭니다.
     for (let i = 1; i <= MAX_IMAGES; i++) {
       const a = document.createElement('a');
       
-      // ★ 중요: 실제 변환하신 파일 이름의 대소문자와 띄어쓰기를 정확히 맞춰주세요.
-      // (예: photo1.jpg 라면 아래처럼, Photo 1.jpg 라면 `gallery/Photo ${i}.jpg` 로 수정)
-      const imgPath = `gallery/photo${i}.jpg`; 
-      a.href = imgPath;
+      // ★ 라이트박스(클릭 시)에는 큰 사진 경로 연결
+      const largePath = encodeURI(`gallery/output/Photo ${i}.jpg`); 
+      // ★ 화면(그리드)에는 가벼운 썸네일 경로 연결
+      const thumbPath = encodeURI(`gallery/output/thumb_Photo ${i}.jpg`); 
+      
+      a.href = largePath;
 
       const img = document.createElement('img');
-      img.src = imgPath;
-      img.loading = "lazy"; // 핵심: 스크롤이 도달해야만 다운로드 시작
+      img.src = thumbPath; // 화면에 썸네일을 뿌림
+      img.loading = "lazy";
       img.alt = "";
 
-      // 2. 만약 파일이 존재하지 않아서 엑스박스가 뜨면, 해당 태그를 조용히 삭제합니다.
       img.onerror = function() {
         a.remove();
       };
