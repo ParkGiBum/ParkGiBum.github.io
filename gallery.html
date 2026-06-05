@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gibum Park - Gallery</title>
 
-<!-- FAVICON -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231772d0'/><text x='50' y='72' font-size='62' font-family='Lato,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='white'>G</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +115,6 @@
   <p style="color:var(--muted); font-size:15px;">A few photos I took for fun.</p>
   <hr>
 
-  <!-- HTML 코드를 작성할 필요 없이 완전히 비워둡니다 -->
   <div class="gallery" id="gallery-container"></div>
 
 </div>
@@ -127,12 +125,12 @@
   <img id="lightbox-img" src="">
   <span class="lightbox-next">&#10095;</span>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const galleryContainer = document.getElementById('gallery-container');
     
-    // 최대 몇 번까지 사진을 검사할지 설정 (예: 넉넉하게 100장)
-    // 1번부터 100번까지 동시에 "이 사진 있니?" 하고 물어보는 방식입니다.
+    // 최대 몇 번까지 사진을 검사할지 설정
     const MAX_IMAGES_TO_CHECK = 100; 
     
     async function loadGalleryImages() {
@@ -141,6 +139,7 @@
 
       // 1. 모든 이미지 로딩 시도를 동시에(병렬로) 시작
       for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
+        // 파일 이름 형식: photo1.jpg, photo2.jpg ...
         const imgPath = `gallery/photo${i}.jpg`;
         
         const promise = new Promise((resolve) => {
@@ -156,12 +155,12 @@
       // 2. 모든 결과가 나올 때까지 기다림
       const results = await Promise.all(imagePromises);
 
-      // 3. 존재하는 사진만 골라서 순서대로 정렬 (병렬 처리 시 섞일 수 있으므로)
+      // 3. 존재하는 사진만 골라서 순서대로 정렬
       const existingImages = results
         .filter(result => result.exists)
         .sort((a, b) => a.index - b.index);
 
-      // 4. 순서대로 정렬된 사진들을 화면(HTML)에 뿌려줌
+      // 4. 순서대로 정렬된 사진들을 화면에 렌더링
       existingImages.forEach(item => {
         const a = document.createElement('a');
         a.href = item.path;
@@ -178,7 +177,7 @@
     // 함수 실행
     loadGalleryImages();
 
-    // ---- 라이트박스 동작 로직 (이전과 동일) ----
+    // ---- 라이트박스 동작 로직 ----
     function initLightbox(links) {
       if(links.length === 0) return;
 
